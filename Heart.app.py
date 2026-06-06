@@ -18,7 +18,7 @@ def train_model():
     Num = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
     scaler = StandardScaler()
     df_enc[Num] = scaler.fit_transform(df_enc[Num])
-    X = df_enc.drop(columns='HeartDisease', axis=1)
+    X = df_enc.drop(columns='HeartDisease')
     y = df_enc['HeartDisease']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
     model = LinearRegression()
