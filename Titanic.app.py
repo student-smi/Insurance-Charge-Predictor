@@ -135,8 +135,14 @@ def train_models():
     df['sex'] = le.fit_transform(df['sex'])
     df['embarked'] = le.fit_transform(df['embarked'])
 
+    # Drop any remaining rows with NaN (e.g. 'alone', 'fare')
+    df.dropna(inplace=True)
+
+    # Cast everything to float to avoid sklearn dtype errors
+    df = df.astype(float)
+
     X = df.drop("survived", axis=1)
-    y = df['survived']
+    y = df['survived'].astype(int)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
 
